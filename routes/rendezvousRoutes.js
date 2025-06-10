@@ -12,4 +12,7 @@ router.get('/', authenticateToken, RendezvousController.getByUser);
 // GET /rendezvous/month : récupérer les RDV par mois et année
 router.get('/month', authenticateToken, RendezvousController.getByMonth);
 
+// DELETE /rendezvous/:id : supprimer un RDV par ID
+router.delete('/:id', authenticateToken, RendezvousController.delete);
+
 module.exports = router;

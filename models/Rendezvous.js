@@ -49,17 +49,23 @@ class Rendezvous {
 
   // Récupérer les rendez-vous par mois et année
   static async getByMonth(user_id, month, year) {
-  const query = `
+    const query = `
     SELECT * FROM rendezvous
     WHERE user_id = $1
       AND EXTRACT(MONTH FROM date) = $2
       AND EXTRACT(YEAR FROM date) = $3
     ORDER BY date, time;
   `;
-  const values = [user_id, month, year];
-  const res = await client.query(query, values);
-  return res.rows;
-}
+    const values = [user_id, month, year];
+    const res = await client.query(query, values);
+    return res.rows;
+  }
+
+  // Mettre à jour un rendez-vous par ID
+  static async deleteById(id, user_id) {
+    const query = `DELETE FROM rendezvous WHERE id = $1 AND user_id = $2`;
+    await client.query(query, [id, user_id]);
+  }
 
 }
 

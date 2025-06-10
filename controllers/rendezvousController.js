@@ -30,20 +30,33 @@ class RendezvousController {
 
   // Récupérer les RDV par mois et année
   static async getByMonth(req, res) {
-  try {
-    const user_id = req.user.id;
-    const { month, year } = req.query;
+    try {
+      const user_id = req.user.id;
+      const { month, year } = req.query;
 
-    if (!month || !year) {
-      return res.status(400).json({ error: 'Mois et année requis.' });
+      if (!month || !year) {
+        return res.status(400).json({ error: 'Mois et année requis.' });
+      }
+
+      const rdvs = await Rendezvous.getByMonth(user_id, month, year);
+      res.json(rdvs);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-
-    const rdvs = await Rendezvous.getByMonth(user_id, month, year);
-    res.json(rdvs);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
   }
-}
+
+  // Mettre à jour un rendez-vous par ID
+  static async delete(req, res) {
+    try {
+      const { id } = req.params;
+      const user_id = req.user.id;
+
+      await Rendezvous.deleteById(id, user_id);
+      res.json({ message: 'Rendez-vous supprimé.' });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
 
 }
 

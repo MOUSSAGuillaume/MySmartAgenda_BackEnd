@@ -1,6 +1,7 @@
 const Todo = require('../models/todo');
 
 class TodoController {
+    // Méthode pour créer une nouvelle tâche
     static async create(req, res) {
         try {
             const { title, description, status, due_date } = req.body;
@@ -18,6 +19,7 @@ class TodoController {
         }
     }
 
+    // Méthode pour récupérer toutes les tâches de l'utilisateur
     static async getAll(req, res) {
         try {
             const user_id = req.user.id;
@@ -45,6 +47,46 @@ class TodoController {
         }
     }
 
+    // Méthode pour mettre à jour une tâche
+    static async delete(req, res) {
+        try {
+            const { id } = req.params;
+            const user_id = req.user.id;
+
+            await Todo.deleteById(id, user_id);
+            res.json({ message: 'Tâche supprimée.' });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
+    // Méthode pour marquer une tâche comme terminée
+    static async markDone(req, res) {
+        try {
+            const { id } = req.params;
+            const user_id = req.user.id;
+
+            const updated = await Todo.markAsDone(id, user_id);
+            if (!updated) {
+                return res.status(404).json({ error: 'Tâche introuvable.' });
+            }
+
+            res.json({ message: 'Tâche marquée comme terminée.', task: updated });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
+    // Méthode pour récupérer les tâches urgentes
+    static async getUrgent(req, res) {
+        try {
+            const user_id = req.user.id;
+            const urgentTodos = await Todo.getUrgentTasks(user_id);
+            res.json(urgentTodos);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
 
 }
 
