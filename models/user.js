@@ -37,30 +37,28 @@ class User {
     const res = await client.query('SELECT id, name, email FROM users');
     return res.rows;
   }
-
+  static async findByEmail(email) {
+    const res = await client.query('SELECT * FROM users WHERE email = $1', [email]);
+    return res.rows[0];
+  }
+  static async comparePassword(plainPassword, hashedPassword) {
+    const bcrypt = require('bcrypt');
+    return await bcrypt.compare(plainPassword, hashedPassword);
+  }
   // Méthode pour vérifier le mot de passe
   static async verifyPassword(email, plainPassword) {
-    const query = 'SELECT * FROM users WHERE email = $1';
-    const res = await client.query(query, [email]);
-    const user = res.rows[0];
-    if (!user) {
-      return false; // Utilisateur non trouvé
+  const query = 'SELECT * FROM users WHERE email = $1';
+  const res = await client.query(query, [email]);
+  const user = res.rows[0];
+  if (!user) return false;
 
-      const user = res.rows[0];
-      const isMatch = await bcrypt.compare(plainPassword, user.password);
-      return isMatch ? user : false;
-
-    }
-
-    // Comparer le mot de passe fourni avec le hash stocké
-    const isMatch = await bcrypt.compare(plainPassword, user.password);
-    if (isMatch) {
-      // Retourner les infos sans le mot de passe
-      const { password, ...userWithoutPassword } = user;
-      return userWithoutPassword;
-    } else {
-      return false; // Mot de passe incorrect
-    }
+  const isMatch = await bcrypt.compare(plainPassword, user.password);
+  if (isMatch) {
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+  } else {
+    return false;
+  }
   }
 }
 

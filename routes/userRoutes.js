@@ -9,6 +9,6 @@ router.post('/', UserController.createUser);
 router.get('/', UserController.getAllUsers);
 
 // Route pour login
-router.post('/login', userController.login);
+router.post('/login', UserController.login);
 
 module.exports = router;
