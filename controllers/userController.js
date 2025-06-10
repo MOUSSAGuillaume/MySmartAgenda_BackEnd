@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = 'vraiment_pas_secret_en_prod'; // À mettre en .env plus tard
 
 class UserController {
     static async createUser(req, res) {
@@ -49,7 +51,14 @@ class UserController {
             }
 
             const { password: _, ...userSansPassword } = user;
-            res.json({ message: 'Connexion réussie', user: userSansPassword });
+            const token = jwt.sign(userSansPassword, SECRET_KEY, { expiresIn: '1h' });
+
+            res.json({
+                message: 'Connexion réussie',
+                token,
+                user: userSansPassword
+            });
+
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
