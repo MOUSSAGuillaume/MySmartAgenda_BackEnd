@@ -9,5 +9,6 @@ router.get('/month', authenticateToken, TodoController.getByMonth); // Récupér
 router.delete('/:id', authenticateToken, TodoController.delete); // Supprimer une tâche par ID
 router.patch('/:id/done', authenticateToken, TodoController.markDone); // Marquer une tâche comme terminée
 router.get('/urgent', authenticateToken, TodoController.getUrgent); // Récupérer les tâches urgentes sans date d'échéance
+router.patch('/:id', authenticateToken, TodoController.update); // Mettre à jour une tâche par ID
 
 module.exports = router;

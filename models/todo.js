@@ -61,7 +61,7 @@ class Todo {
     return res.rows;
   }
 
-  // Méthode pour mettre à jour une tâche par son ID
+  // Méthode pour supprimer une tâche par son ID
   static async deleteById(id, user_id) {
     const query = `DELETE FROM todos WHERE id = $1 AND user_id = $2`;
     await client.query(query, [id, user_id]);
@@ -91,6 +91,31 @@ class Todo {
     const res = await client.query(query, [user_id]);
     return res.rows;
   }
+
+  // Méthode pour mettre à jour une tâche par son ID
+  static async updateById(id, user_id, fieldsToUpdate) {
+    const columns = [];
+    const values = [];
+    let i = 1;
+
+    for (const [key, value] of Object.entries(fieldsToUpdate)) {
+      columns.push(`${key} = $${i}`);
+      values.push(value);
+      i++;
+    }
+
+    const query = `
+    UPDATE todos
+    SET ${columns.join(', ')}
+    WHERE id = $${i} AND user_id = $${i + 1}
+    RETURNING *;
+  `;
+    values.push(id, user_id);
+
+    const res = await client.query(query, values);
+    return res.rows[0];
+  }
+
 
 }
 

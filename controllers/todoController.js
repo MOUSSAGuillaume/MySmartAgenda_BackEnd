@@ -47,7 +47,7 @@ class TodoController {
         }
     }
 
-    // Méthode pour mettre à jour une tâche
+    // Méthode pour supprimer une tâche
     static async delete(req, res) {
         try {
             const { id } = req.params;
@@ -83,6 +83,28 @@ class TodoController {
             const user_id = req.user.id;
             const urgentTodos = await Todo.getUrgentTasks(user_id);
             res.json(urgentTodos);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
+    // Méthode pour mettre à jour une tâche par son ID
+    static async update(req, res) {
+        try {
+            const { id } = req.params;
+            const user_id = req.user.id;
+            const fields = req.body;
+
+            if (!fields || Object.keys(fields).length === 0) {
+                return res.status(400).json({ error: 'Aucune donnée à mettre à jour.' });
+            }
+
+            const updatedTodo = await Todo.updateById(id, user_id, fields);
+            if (!updatedTodo) {
+                return res.status(404).json({ error: 'Tâche non trouvée.' });
+            }
+
+            res.json({ message: 'Tâche mise à jour.', task: updatedTodo });
         } catch (err) {
             res.status(500).json({ error: err.message });
         }
