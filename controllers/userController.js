@@ -1,6 +1,6 @@
-const User = require('../models/User');
+const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const SECRET_KEY = 'vraiment_pas_secret_en_prod'; // À mettre en .env plus tard
+const SECRET_KEY = process.env.JWT_SECRET; // À mettre en .env plus tard
 
 class UserController {
     static async createUser(req, res) {
