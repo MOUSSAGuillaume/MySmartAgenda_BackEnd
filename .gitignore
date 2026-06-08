@@ -1,0 +1,26 @@
+# Dependencies
+/vendor
+
+# Environment variables
+.env
+
+# Composer
+composer.phar
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-data/
+
+# Temporary files
+*.tmp
+*.cache
