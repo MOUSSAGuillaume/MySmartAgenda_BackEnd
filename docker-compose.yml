@@ -1,0 +1,61 @@
+services:
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: mysmartagenda_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - mysmartagenda_network
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: mysmartagenda_php
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - mysmartagenda_network
+
+  mariadb:
+    image: mariadb:11
+    container_name: mysmartagenda_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysmartagenda
+      MYSQL_USER: mysmartagenda
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mysmartagenda_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: mysmartagenda_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mariadb
+    networks:
+      - mysmartagenda_network
+
+volumes:
+  mysql_data:
+
+networks:
+  mysmartagenda_network:
