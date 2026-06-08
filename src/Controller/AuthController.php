@@ -77,4 +77,24 @@ class AuthController
             'token' => $token
         ]);
     }
+
+    public function me(): void
+    {
+        $userToken = \App\Middleware\AuthMiddleware::getAuthenticatedUser();
+
+        if (!$userToken) {
+            http_response_code(401);
+
+            echo json_encode([
+                'error' => 'Token manquant ou invalide'
+            ]);
+
+            return;
+        }
+
+        echo json_encode([
+            'id' => $userToken->user_id,
+            'email' => $userToken->email
+        ]);
+    }
 }
