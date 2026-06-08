@@ -3,22 +3,32 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
-use App\Repository\UserRepository;
-use App\Security\JwtService;
 
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
 header('Content-Type: application/json');
 
-$userRepository = new UserRepository();
+$routes = require __DIR__ . '/../src/Config/routes.php';
 
-$user = $userRepository->findByEmail('mehdi@test.fr');
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$method = $_SERVER['REQUEST_METHOD'];
 
-$jwtService = new JwtService();
+if (!isset($routes[$method][$uri])) {
 
-$token = $jwtService->generateToken($user);
+    http_response_code(404);
 
-echo json_encode([
-    'token' => $token
-]);
+    echo json_encode([
+        'error' => 'Route not found'
+    ]);
+
+    exit;
+}
+
+$route = $routes[$method][$uri];
+
+$controllerClass = 'App\\Controller\\' . $route['controller'];
+
+$controller = new $controllerClass();
+
+$controller->{$route['method']}();
