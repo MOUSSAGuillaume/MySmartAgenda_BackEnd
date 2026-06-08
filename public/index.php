@@ -3,34 +3,22 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
-use App\Service\AuthService;
+use App\Repository\UserRepository;
+use App\Security\JwtService;
 
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
 header('Content-Type: application/json');
 
-try {
+$userRepository = new UserRepository();
 
-    $authService = new AuthService();
+$user = $userRepository->findByEmail('mehdi@test.fr');
 
-    $userId = $authService->register([
-        'firstname' => 'Mehdi',
-        'lastname' => 'Moussa',
-        'email' => 'mehdi@test.fr',
-        'password' => 'Password123'
-    ]);
+$jwtService = new JwtService();
 
-    echo json_encode([
-        'status' => 'success',
-        'user_id' => $userId
-    ]);
+$token = $jwtService->generateToken($user);
 
-} catch (Exception $e) {
-
-    echo json_encode([
-        'status' => 'error',
-        'message' => $e->getMessage()
-    ]);
-
-}
+echo json_encode([
+    'token' => $token
+]);
