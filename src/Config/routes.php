@@ -16,6 +16,11 @@ return [
         '/api/appointments' => [
             'controller' => 'AppointmentController',
             'method' => 'create'
+        ],
+
+        '/api/tasks' => [
+            'controller' => 'TaskController',
+            'method' => 'create'
         ]
     ],
 
@@ -28,6 +33,11 @@ return [
         '/api/appointments' => [
             'controller' => 'AppointmentController',
             'method' => 'list'
+        ],
+
+        '/api/tasks' => [
+            'controller' => 'TaskController',
+            'method' => 'list'
         ]
     ],
 
@@ -35,12 +45,22 @@ return [
         '/api/appointments/{id}' => [
             'controller' => 'AppointmentController',
             'method' => 'update'
+        ],
+
+        '/api/tasks/{id}' => [
+            'controller' => 'TaskController',
+            'method' => 'update'
         ]
     ],
 
     'DELETE' => [
         '/api/appointments/{id}' => [
             'controller' => 'AppointmentController',
+            'method' => 'delete'
+        ],
+
+        '/api/tasks/{id}' => [
+            'controller' => 'TaskController',
             'method' => 'delete'
         ]
     ]
