@@ -56,4 +56,46 @@ class AppointmentRepository
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function update(
+        int $appointmentId,
+        int $userId,
+        string $title,
+        ?string $description,
+        string $appointmentDate
+    ): bool {
+        $stmt = $this->pdo->prepare("
+            UPDATE appointments
+            SET title = :title,
+                description = :description,
+                appointment_date = :appointment_date
+            WHERE id = :id
+            AND user_id = :user_id
+        ");
+
+        $stmt->execute([
+            'id' => $appointmentId,
+            'user_id' => $userId,
+            'title' => $title,
+            'description' => $description,
+            'appointment_date' => $appointmentDate
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function delete(int $appointmentId, int $userId): bool
+    {
+        $stmt = $this->pdo->prepare("
+            DELETE FROM appointments
+            WHERE id = :id
+            AND user_id = :user_id
+        ");
+
+        $stmt->execute([
+            'id' => $appointmentId,
+            'user_id' => $userId
+        ]);
+
+        return $stmt->rowCount() > 0;
+    }
 }

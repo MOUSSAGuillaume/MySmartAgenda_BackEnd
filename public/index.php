@@ -14,8 +14,25 @@ $routes = require __DIR__ . '/../src/Config/routes.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
 
-if (!isset($routes[$method][$uri])) {
+$routeFound = null;
+$params = [];
 
+foreach ($routes[$method] ?? [] as $routePath => $routeConfig) {
+    $pattern = preg_replace('#\{id\}#', '([0-9]+)', $routePath);
+    $pattern = '#^' . $pattern . '$#';
+
+    if (preg_match($pattern, $uri, $matches)) {
+        $routeFound = $routeConfig;
+
+        if (isset($matches[1])) {
+            $params['id'] = (int) $matches[1];
+        }
+
+        break;
+    }
+}
+
+if (!$routeFound) {
     http_response_code(404);
 
     echo json_encode([
@@ -25,10 +42,8 @@ if (!isset($routes[$method][$uri])) {
     exit;
 }
 
-$route = $routes[$method][$uri];
-
-$controllerClass = 'App\\Controller\\' . $route['controller'];
+$controllerClass = 'App\\Controller\\' . $routeFound['controller'];
 
 $controller = new $controllerClass();
 
-$controller->{$route['method']}();
+$controller->{$routeFound['method']}($params);

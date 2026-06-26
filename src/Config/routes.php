@@ -3,7 +3,6 @@
 return [
 
     'POST' => [
-
         '/api/register' => [
             'controller' => 'AuthController',
             'method' => 'register'
@@ -21,7 +20,6 @@ return [
     ],
 
     'GET' => [
-
         '/api/me' => [
             'controller' => 'AuthController',
             'method' => 'me'
@@ -30,6 +28,20 @@ return [
         '/api/appointments' => [
             'controller' => 'AppointmentController',
             'method' => 'list'
+        ]
+    ],
+
+    'PUT' => [
+        '/api/appointments/{id}' => [
+            'controller' => 'AppointmentController',
+            'method' => 'update'
+        ]
+    ],
+
+    'DELETE' => [
+        '/api/appointments/{id}' => [
+            'controller' => 'AppointmentController',
+            'method' => 'delete'
         ]
     ]
 
