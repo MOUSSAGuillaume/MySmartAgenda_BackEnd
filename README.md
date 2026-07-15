@@ -5,7 +5,7 @@
 ![MariaDB](https://img.shields.io/badge/MariaDB-11-003545?logo=mariadb&logoColor=white)
 
 ---
-  Présentation
+  # Présentation
 
 MySmartAgenda** est une API REST développée en **PHP 8** dans le cadre de la préparation du titre professionnel "Développeur Web et Web Mobile (DWWM)".
 L'objectif du projet est de proposer une solution simple, sécurisée et évolutive permettant à un utilisateur authentifié de gérer ses rendez-vous et ses tâches personnelles.
@@ -20,7 +20,7 @@ Le projet a également été pensé pour évoluer vers une solution plus complè
 Cette architecture permet de faire évoluer l'application sans remettre en cause le backend déjà développé.
 
 ---
-  Pourquoi ce projet ?
+  # Pourquoi ce projet ?
 
 Ce projet a été réalisé afin de mettre en pratique les compétences attendues d'un développeur backend :
 - Concevoir une API REST.
@@ -33,7 +33,7 @@ Ce projet a été réalisé afin de mettre en pratique les compétences attendue
 - Préparer un projet pour un futur déploiement.
 
 ---
-  Architecture
+  # Architecture
 
 Toutes les requêtes transitent par un **point d'entrée unique** (`public/index.php`).
 
@@ -82,7 +82,7 @@ Repositories
 Cette organisation facilite la maintenance du projet, améliore la lisibilité du code et permet d'ajouter facilement de nouvelles fonctionnalités.
 
 ---
-  Technologies utilisées
+  # Technologies utilisées
 
 | Technologie | Utilisation |
 |-------------|-------------|
@@ -95,28 +95,28 @@ Cette organisation facilite la maintenance du projet, améliore la lisibilité d
 | Bootstrap 5 | Interface de démonstration |
 
 ---
-  Fonctionnalités
+  # Fonctionnalités
 
-Authentification
+### Authentification
 - Création d'un compte
 - Connexion
 - Génération d'un JWT
 - Protection des routes privées
 
-Gestion des rendez-vous
+### Gestion des rendez-vous
 - Création
 - Consultation
 - Modification
 - Suppression
 
-Gestion des tâches
+### Gestion des tâches
 - Création
 - Consultation
 - Modification
 - Suppression
 
 ---
-  Sécurité
+  # Sécurité
 
 Plusieurs mécanismes de sécurité ont été mis en place :
 - Authentification par JWT.
@@ -127,7 +127,7 @@ Plusieurs mécanismes de sécurité ont été mis en place :
 - Protection XSS côté interface grâce à l'échappement des données avant affichage.
 
 ---
-  Utilisation de l'API
+  # Utilisation de l'API
 
 Toutes les fonctionnalités sont accessibles via une API REST.
 L'API peut être utilisée :
@@ -137,13 +137,13 @@ L'API peut être utilisée :
 
 Le fonctionnement général est le suivant :
 
-1. Création d'un compte
+### 1. Création d'un compte
 L'utilisateur crée son compte en envoyant ses informations personnelles.
 
 ```http
 POST /api/register
 ```
-2. Connexion
+### 2. Connexion
 Une fois inscrit, l'utilisateur s'authentifie.
 
 ```http
@@ -158,7 +158,7 @@ L'API retourne alors un JSON Web Token (JWT).
 }
 ```
 
-3. Utilisation du JWT
+### 3. Utilisation du JWT
 Le token doit être envoyé dans chaque requête nécessitant une authentification.
 
 ```http
@@ -189,7 +189,7 @@ Réponse :
 ```
 
 ---
-  Principaux endpoints
+  ## Principaux endpoints
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
@@ -206,7 +206,7 @@ Réponse :
 | DELETE | `/api/tasks/{id}` | Suppression d'une tâche |
 
 ---
-  Démonstration
+  # Démonstration
 
 Une interface Bootstrap est intégrée au projet afin de présenter facilement les fonctionnalités du backend.
 Elle permet :
@@ -219,7 +219,7 @@ Elle permet :
 <img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/fe339ddd-229e-49bb-b455-ca6128c53db9" />
 
 ---
-  Déploiement
+  # Déploiement
 
 Le projet est entièrement conteneurisé avec Docker.
 L'application peut être démarrée avec :
@@ -239,7 +239,7 @@ Pour un déploiement en production, il est recommandé :
 - de ne pas exposer phpMyAdmin publiquement.
 
 ---
-  Compétences mises en œuvre
+  # Compétences mises en œuvre
 
 | Domaine | Compétences |
 |----------|-------------|
@@ -252,7 +252,7 @@ Pour un déploiement en production, il est recommandé :
 | Versionnement | Git & GitHub |
 
 ---
-  Perspectives d'évolution
+  # Perspectives d'évolution
 
 L'architecture retenue permet d'ajouter facilement de nouvelles fonctionnalités, parmi lesquelles :
 
@@ -267,7 +267,7 @@ L'architecture retenue permet d'ajouter facilement de nouvelles fonctionnalités
 - Tests unitaires PHPUnit.
 
 ---
-  Auteur
+  # Auteur
 
 Guillaume Moussa
 
