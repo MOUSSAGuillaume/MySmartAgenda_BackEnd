@@ -31,11 +31,13 @@ class Database
                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                     ]
                 );
-
             } catch (PDOException $e) {
 
-                die('Erreur connexion BDD : ' . $e->getMessage());
+                error_log($e->getMessage());
 
+                throw new \RuntimeException(
+                    'Impossible de se connecter à la base de données.'
+                );
             }
         }
 
