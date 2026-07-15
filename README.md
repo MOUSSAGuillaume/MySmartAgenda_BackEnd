@@ -5,9 +5,9 @@
 ![MariaDB](https://img.shields.io/badge/MariaDB-11-003545?logo=mariadb&logoColor=white)
 
 ---
-  # Présentation
+  ## Présentation
 
-MySmartAgenda** est une API REST développée en **PHP 8** dans le cadre de la préparation du titre professionnel "Développeur Web et Web Mobile (DWWM)".
+**MySmartAgenda** est une **API REST** développée en **PHP 8** dans le cadre de la préparation du titre professionnel "Développeur Web et Web Mobile (DWWM)".
 L'objectif du projet est de proposer une solution simple, sécurisée et évolutive permettant à un utilisateur authentifié de gérer ses rendez-vous et ses tâches personnelles.
 L'application repose sur une architecture **MVC**, une authentification **JWT**, une base de données **MariaDB** et une conteneurisation complète avec **Docker** afin de faciliter son développement et son déploiement.
 Une interface web développée avec **Bootstrap 5** accompagne l'API afin de démontrer facilement l'ensemble des fonctionnalités sans utiliser Postman.
@@ -20,7 +20,7 @@ Le projet a également été pensé pour évoluer vers une solution plus complè
 Cette architecture permet de faire évoluer l'application sans remettre en cause le backend déjà développé.
 
 ---
-  # Pourquoi ce projet ?
+  ## Pourquoi ce projet ?
 
 Ce projet a été réalisé afin de mettre en pratique les compétences attendues d'un développeur backend :
 - Concevoir une API REST.
@@ -33,7 +33,7 @@ Ce projet a été réalisé afin de mettre en pratique les compétences attendue
 - Préparer un projet pour un futur déploiement.
 
 ---
-  # Architecture
+  ## Architecture
 
 Toutes les requêtes transitent par un **point d'entrée unique** (`public/index.php`).
 
@@ -82,7 +82,7 @@ Repositories
 Cette organisation facilite la maintenance du projet, améliore la lisibilité du code et permet d'ajouter facilement de nouvelles fonctionnalités.
 
 ---
-  # Technologies utilisées
+  ## Technologies utilisées
 
 | Technologie | Utilisation |
 |-------------|-------------|
@@ -95,7 +95,7 @@ Cette organisation facilite la maintenance du projet, améliore la lisibilité d
 | Bootstrap 5 | Interface de démonstration |
 
 ---
-  # Fonctionnalités
+  ## Fonctionnalités
 
 ### Authentification
 - Création d'un compte
@@ -116,7 +116,7 @@ Cette organisation facilite la maintenance du projet, améliore la lisibilité d
 - Suppression
 
 ---
-  # Sécurité
+  ## Sécurité
 
 Plusieurs mécanismes de sécurité ont été mis en place :
 - Authentification par JWT.
@@ -127,7 +127,7 @@ Plusieurs mécanismes de sécurité ont été mis en place :
 - Protection XSS côté interface grâce à l'échappement des données avant affichage.
 
 ---
-  # Utilisation de l'API
+  ## Utilisation de l'API
 
 Toutes les fonctionnalités sont accessibles via une API REST.
 L'API peut être utilisée :
@@ -206,7 +206,7 @@ Réponse :
 | DELETE | `/api/tasks/{id}` | Suppression d'une tâche |
 
 ---
-  # Démonstration
+  ## Démonstration
 
 Une interface Bootstrap est intégrée au projet afin de présenter facilement les fonctionnalités du backend.
 Elle permet :
@@ -219,7 +219,7 @@ Elle permet :
 <img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/fe339ddd-229e-49bb-b455-ca6128c53db9" />
 
 ---
-  # Déploiement
+  ## Déploiement
 
 Le projet est entièrement conteneurisé avec Docker.
 L'application peut être démarrée avec :
@@ -239,7 +239,7 @@ Pour un déploiement en production, il est recommandé :
 - de ne pas exposer phpMyAdmin publiquement.
 
 ---
-  # Compétences mises en œuvre
+  ## Compétences mises en œuvre
 
 | Domaine | Compétences |
 |----------|-------------|
@@ -247,12 +247,12 @@ Pour un déploiement en production, il est recommandé :
 | Architecture | MVC, Repository Pattern |
 | API | REST, JSON, Codes HTTP |
 | Base de données | MariaDB, PDO |
-| Sécurité | JWT, Hashage, SQL Injection, XSS |
+| Sécurité | JWT, hashage des mots de passe, prévention des injections SQL et des attaques XSS |
 | DevOps | Docker, Nginx |
 | Versionnement | Git & GitHub |
 
 ---
-  # Perspectives d'évolution
+  ## Perspectives d'évolution
 
 L'architecture retenue permet d'ajouter facilement de nouvelles fonctionnalités, parmi lesquelles :
 
@@ -267,7 +267,7 @@ L'architecture retenue permet d'ajouter facilement de nouvelles fonctionnalités
 - Tests unitaires PHPUnit.
 
 ---
-  # Auteur
+  ## Auteur
 
 **Guillaume Moussa**
 
