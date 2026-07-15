@@ -272,7 +272,9 @@ L'architecture retenue permet d'ajouter facilement de nouvelles fonctionnalités
 **Guillaume Moussa**
 
 Projet réalisé dans le cadre de la préparation du titre professionnel :
+
 **Développeur Web et Web Mobile (DWWM)**
+
 ---
 > Ce projet met en œuvre les principales bonnes pratiques liées au développement d'une API REST moderne : architecture MVC, programmation orientée objet, authentification JWT, sécurisation des accès,
 Docker et préparation au déploiement.
